@@ -96,7 +96,7 @@ class MyTelnetHandler(TelnetHandler):
         #if not username:
         #    # complain by raising any exception
         #    raise
-        self.writeresponse(“Invalid username/password”)
+        self.writeresponse('Invalid username/password')
         raise Exception()
 
     def session_start(self):
