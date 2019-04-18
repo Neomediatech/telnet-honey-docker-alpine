@@ -78,7 +78,7 @@ class MyServer(object):
 # Subclass TelnetHandler to add our own commands and to call back
 # to myserver.
 
-class TestTelnetHandler(TelnetHandler):
+class MyTelnetHandler(TelnetHandler):
     # Create the instance of the server within the class for easy use
     myserver = MyServer()
 
@@ -93,9 +93,11 @@ class TestTelnetHandler(TelnetHandler):
         '''Called to validate the username/password.'''
         # Note that this method will be ignored if the SSH server is invoked.
         # We accept everyone here, as long as any name is given!
-        if not username:
-            # complain by raising any exception
-            raise
+        #if not username:
+        #    # complain by raising any exception
+        #    raise
+        self.writeresponse(“Invalid username/password”)
+        raise Exception()
 
     def session_start(self):
         '''Called after the user successfully logs in.'''
@@ -148,15 +150,15 @@ if __name__ == '__main__':
 
 
         # Create the handler for SSH, register the defined handler for use as the PTY
-        class TestSSHHandler(SSHHandler):
-            telnet_handler = TestTelnetHandler
+        class MySSHHandler(SSHHandler):
+            telnet_handler = MyTelnetHandler
             # Create or open the server key file
             host_key = getRsaKeyFile("server_rsa.key")
 
         # Define which handler the server should use:
-        Handler = TestSSHHandler
+        Handler = MySSHHandler
     else:
-        Handler = TestTelnetHandler
+        Handler = MyTelnetHandler
 
     if SERVERTYPE == 'green':
         # Multi-green-threaded server
