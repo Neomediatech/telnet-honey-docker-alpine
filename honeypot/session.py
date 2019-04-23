@@ -25,7 +25,7 @@ class Session:
 		self.files = []
 
 	def login(self, user, password):
-		dbg("Session login: user=" + user + " password=" + password)
+		dbg("Session login: user=" + user + " password=" + password + " host=[" + self.remote_addr + "]")
 		
 		self.send_string(PROMPT)
 
