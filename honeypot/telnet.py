@@ -12,7 +12,7 @@ class IPFilter:
 
 	def __init__(self):
 		self.map = {}
-		self.timeout = 2
+		self.timeout = 1
 
 	def add_ip(self, ip):
 		self.map[ip] = time.time()
